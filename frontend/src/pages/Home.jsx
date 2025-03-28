@@ -7,25 +7,11 @@ import useProductStore from '../store/useProductStore';
 import Slider from '../components/Slider';
 const Home = () => {
 
-  const { setProducts } = useProductStore();
+  const { products, fetchLandingProducts } = useProductStore();
 
   useEffect(() => {
-    const fetchingData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/product/landingPageProducts');
-        if (response.status === 200) {
-          setProducts(response.data.data);
-          console.log(response.data.data); 
-        } else {
-          console.log('Unexpected status:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchingData();
-  }, [setProducts]);
+    if(products.length === 0) { fetchLandingProducts() }
+  }, []);
 
   return (
     <>
@@ -69,7 +55,7 @@ const Home = () => {
         <SneakersWrapper tag="trending" title="Trending Sneakers"/>
         <Slider/>
         <SneakersWrapper tag="new" title="Just Droped"/>
-        <SneakersWrapper tag="sale" title="Best Dealsfsr"/>
+        <SneakersWrapper tag="sale" title="Best Deals"/>
 
       </div>
     </>

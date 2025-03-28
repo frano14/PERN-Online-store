@@ -1,22 +1,35 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios';
+import useProductStore from '../store/useProductStore';
+import ProductWrapper from '../components/ProductWrapper';
+import SimilarProducts from '../components/SimilarProducts';
+import Reviews from '../components/Reviews';
 
 const SingleProductPage = () => {
     const {id} = useParams();
+
+    const { currentProduct, fetchCurrentProduct } = useProductStore()
     
     useEffect(()=>{
-        const fetchData = async () => {
-            const response = await axios.get("http://localhost:5000/api/product/" + id);
-            console.log(response.data.data)
-        }
+        fetchCurrentProduct(id)
+    }, [id])
 
-        fetchData();
-    }, [])
+    
+    if (!currentProduct) {
+        return <p>Loading product...</p>;
+    }
 
   return (
-    <div>
-      radi
+    <div className='py-8 w-[1200px] mx-auto'>
+      {currentProduct ? (
+        <>
+          <ProductWrapper/>
+          <Reviews/>
+          <SimilarProducts/>
+        </>
+      ) : (
+        <p>Loading product...</p>
+      )}
     </div>
   )
 }

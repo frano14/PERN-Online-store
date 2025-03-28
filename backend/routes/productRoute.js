@@ -1,11 +1,12 @@
 import express from "express";
-import { createProduct, getAllProducts, getLandingPageProducts, getProduct } from "../controllers/productController.js";
+import { createProduct, getAllProducts, getLandingPageProducts, getProduct, getSimilarProducts } from "../controllers/productController.js";
 
 const router = express.Router();
 
-router.get("/", getAllProducts);
-router.get("/:id", getProduct);
-router.get("/landingPageProducts", getLandingPageProducts);
 router.post("/create", createProduct);
+router.get("/", getAllProducts);
+router.get("/landingPageProducts", getLandingPageProducts);
+router.get("/getSimilarProducts", getSimilarProducts);
+router.get("/:id", getProduct);
 
 export default router;

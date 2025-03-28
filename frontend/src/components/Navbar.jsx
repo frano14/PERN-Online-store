@@ -1,9 +1,13 @@
+import { Link } from 'react-router-dom'
+
 const Navbar = () => {
   return (
   <>
   <div className="navbar bg-base-100 py-6 px-8 border-b-[1px] z-999 border-[#FFFFFF60] gap-10">
     <div className="navbar-start w-full gap-10">
-      <h1 className="text-2xl font-black font-serif">Lane2k</h1>
+      <Link to="/">
+        <h1 className="text-2xl font-black font-serif">Lane2k</h1>
+      </Link>
       <div className="form-control w-full">
           <input type="text" placeholder="Search" className="input w-full input-bordered md:w-auto focus:outline-none bg-[#FFFFFF15] " />
         </div>
